@@ -38,6 +38,19 @@ class SeriesController extends AbstractController
     }
 
     public function ver($id){
-        return new Response('hola desde ver');
+        //cargar un repositorio personalizado
+        $serie_repo = $this->getDoctrine()->getRepository(Serie::class);
+
+        //consulta
+        $serie_repo = $serie_repo->find($id);
+
+        //comprobar si el resultado es correcto
+        if (!$serie) {
+            $message = 'La serie no existe';
+        }else{
+            $message = 'La serie es: '.$serie->getNombre().' y su director es: '.$serie->getCreador().' y se hizo
+            en el año: '.$serie->getAnio();
+        }
+        return new Response($message);
     }
 }
