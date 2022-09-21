@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+            {% block titulo %} Inicio {% endblock %} - Buscador de series
+        </title>
+    </head>
+    <body>
+        <div id="header">
+            {% block cabecera %}
+                <h1>Formulario de busqueda</h1>
+            {% endblock %}
+        </div>
+        <hr>
+        <section id="content">
+            {% block contenido %}
+                <p>Aqui va el formulario</p>
+            {% endblock %}
+        </section>
+        <hr>
+        <footer>
+            prueba de symfony
+        </footer>
+    </body>
+</html>
