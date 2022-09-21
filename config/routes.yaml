@@ -11,3 +11,16 @@ buscar:
 mostrar:
     path: /mostrar
     controller: App\Controller\SerieController::mostrar
+
+formulario_index:
+    path: /formulario/index
+    controller: App\Controller\SeriesController::index
+
+
+formulario_guardar:
+    path: /formulario/guardar
+    controller: App\Controller\SeriesController::guardar
+
+formulario_ver:
+    path: /formulario/ver
+    controller: App\Controller\SeriesController::ver

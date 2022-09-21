@@ -17,7 +17,7 @@ class Serie
      */
     private $id;
     /**
-     * @ORM\Column(type="string", length=30)
+     * @ORM\Column(type="string", length=11)
      */
     private $nombre;
     /**
@@ -29,7 +29,7 @@ class Serie
      */
     private $anio;
     /**
-     * @ORM\Column(type="integer", length=4)
+     * @ORM\Column(type="integer", length=5)
      */
     public function getId(): ?int
     {
