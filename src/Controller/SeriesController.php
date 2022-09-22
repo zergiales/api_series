@@ -19,6 +19,22 @@ class SeriesController extends AbstractController
             ->getRepository(Serie::class);
         //consulta
         $ver_series = $serie_repo->findAll();
+        
+        //query builder para sacar las series cuyo creador se llame gabriel
+        $qb = $serie_repo->createQueryBuilder('s')
+                         ->andWhere("s.creador ='gabriel '")
+                        ->orWhere("s.anio =2022")
+                        ->orderBy('s.id','DESC')
+                         ->getQuery();
+
+        $resulset = $qb->execute();
+        var_dump($resulset);
+
+        //DQL
+        // $dql = "SELECT s FROM App\Entity\Serie s ORDER BY s.id DESC";
+        // $query = $ver_series->createQuery($dql);
+        // $resulset = $query->execute();
+
 
         return $this->render('series/index.html.twig', [
             'controller_name' => 'SeriesController',
@@ -89,6 +105,28 @@ class SeriesController extends AbstractController
             $em->flush();
 
             $message = 'Has actualizado la serie '.$serie->getId();
+        }
+        //respuesta
+        return new Response($message);
+    }
+
+    public function eliminar($id)
+    {
+        //cargar Doctrine
+        $doctrine = $this->getDoctrine();
+        //cargar entityManager
+        $em = $doctrine->getManager();
+        //cargar repo Serie
+        $serie_repo = $em->getRepository(Serie::class);
+        //Find para conseguir objeto
+        $serie = $serie_repo->find($id);
+
+        if ($serie && is_object($serie)) {
+            $em->remove($serie);
+            $em->flush();
+            $message="serie eliminada";
+        }else{
+            $message="serie no eliminada";
         }
         //respuesta
         return new Response($message);
