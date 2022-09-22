@@ -22,5 +22,5 @@ formulario_guardar:
     controller: App\Controller\SeriesController::guardar
 
 formulario_ver:
-    path: /formulario/ver
+    path: /formulario/ver/{id}
     controller: App\Controller\SeriesController::ver

@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SeriesController!{% endblock %}
+{% block title %}Prueba tecnica{% endblock %}
 
 {% block body %}
 <style>
@@ -9,12 +9,21 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Formulario de serie del controlador{{ controller_name }}! ✅</h1>
 
     This friendly message is coming from:
     <ul>
         <li>Your controller at <code><a href="{{ 'C:/xampp2/htdocs/proyectos_php/prueba/api_series/src/Controller/SeriesController.php'|file_link(0) }}">src/Controller/SeriesController.php</a></code></li>
         <li>Your template at <code><a href="{{ 'C:/xampp2/htdocs/proyectos_php/prueba/api_series/templates/series/index.html.twig'|file_link(0) }}">templates/series/index.html.twig</a></code></li>
     </ul>
+    <!--vamos a sacar con un bucle todas la series-->
+    {{dump(series)}}
+    {% for serie in series %}
+            <ul>
+                <li>{{serie.nombre}}</li>
+                <li>{{serie.creador}}</li>
+                <li>{{serie.anio}}</li>
+            </ul>
+    {% endfor %}
 </div>
 {% endblock %}
