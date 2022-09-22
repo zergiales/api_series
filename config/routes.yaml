@@ -24,3 +24,7 @@ formulario_guardar:
 formulario_ver:
     path: /formulario/ver/{id}
     controller: App\Controller\SeriesController::ver
+
+formulario_actualizar:
+    path: /formulario/actualizar/{id}
+    controller: App\Controller\SeriesController::actualizar

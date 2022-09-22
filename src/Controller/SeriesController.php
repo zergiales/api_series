@@ -66,23 +66,31 @@ class SeriesController extends AbstractController
         return new Response($message);
     }
 
-    public function update($id){
+    public function actualizar($id){
         //cargar Doctrine
-
+        $doctrine = $this->getDoctrine();
         //cargar entityManager
-
+        $em = $doctrine->getManager();
         //cargar repo Serie
-
+        $serie_repo = $em->getRepository(Serie::class);
         //Find para conseguir objeto
-        
+        $serie = $serie_repo->find($id);
         //comprobar si el objeto me llega
+        if (!$serie) {
+            $message = 'La serie no existe en la base de datos';
+        }else{
+            //asignarle los valores al objeto
+            $serie->setNombre("serie por defecto $id");
+            $serie->setCreador('creador por defecto');
+            $serie->setAnio('2022');
+            //persistir en doctrine
+            $em->persist($serie);
+            //guardar enbd
+            $em->flush();
 
-        //asignarle los valores al objeto
-
-        //persistir en doctrine
-
-        //guardar enbd
-
+            $message = 'Has actualizado la serie '.$serie->getId();
+        }
         //respuesta
+        return new Response($message);
     }
 }
