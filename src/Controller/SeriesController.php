@@ -42,7 +42,7 @@ class SeriesController extends AbstractController
         $serie_repo = $this->getDoctrine()->getRepository(Serie::class);
 
         //consulta
-        $serie_repo = $serie_repo->find($id);
+        $serie = $serie_repo->find($id);
 
         //comprobar si el resultado es correcto
         if (!$serie) {
