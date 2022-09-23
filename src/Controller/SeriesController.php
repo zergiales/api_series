@@ -6,10 +6,28 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Serie;
+use Doctrine\DBAL\Types\TextType as TypesTextType;
+
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SeriesController extends AbstractController
 {
-
+    public function create(){
+        $serie = new Serie();
+        $form = $this->createFormBuilder($serie)
+                    ->setAction($this->generateUrl(('formulario_guardar'))
+                    ->setMethod('POST')
+                        ->add('nombre', TypesTextType::class)
+                        ->add('creador', TypesTextType::class)
+                        ->add('año', TypesIntType::class)
+                        ->add('submit', TypesTextType::class)
+                    ->getForm();
+        
+        return $this->render('serie/crear-serie.html.twig', [
+            'form' => $form->createView()
+        ]);
+    }
     public function index(): Response
     {
         //creamos el repositorio que va a sacar todas las series
@@ -28,14 +46,16 @@ class SeriesController extends AbstractController
                          ->getQuery();
 
         $resulset = $qb->execute();
-        var_dump($resulset);
+        // var_dump($resulset);
 
         //DQL
         // $dql = "SELECT s FROM App\Entity\Serie s ORDER BY s.id DESC";
         // $query = $ver_series->createQuery($dql);
         // $resulset = $query->execute();
 
-
+        //repositorio
+        $repo = $serie_repo->getSeriesByOrder('DESC');
+        var_dump($repo);
         return $this->render('series/index.html.twig', [
             'controller_name' => 'SeriesController',
             'series' => $ver_series 

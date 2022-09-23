@@ -32,3 +32,7 @@ formulario_actualizar:
 formulario_eliminar:
     path: /formulario/eliminar/{id}
     controller: App\Controller\SeriesController::eliminar
+
+crear_serie:
+    path: /crear_serie
+    controller: App\Controller\SeriesController::crearSerie
